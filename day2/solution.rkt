@@ -5,12 +5,7 @@
     (map string->number r)))
 
 (define (deltas record)
-  (let f ([lst (rest record)]
-          [prev (first record)]
-          [acc '()])
-    (if (empty? lst)
-        acc
-        (let ([cur (first lst)]) (f (rest lst) cur (cons (- cur prev) acc))))))
+  (map - (rest record) (drop-right record 1)))
 
 (define (bad-level? x)
   (let ([a (abs x)]) (or (< a 1) (> a 3))))
@@ -25,11 +20,7 @@
 (count is-record-valid? records)
 
 (define (gen-off-by1 lst)
-  (for/list ([i (in-range (length lst))])
-    (for/list ([v lst]
-               [j (in-naturals)]
-               #:unless (= i j))
-      v)))
+  (combinations lst (sub1 (length lst))))
 
 (define (is-record-valid-tolerance? record)
   (or (is-record-valid? record) (ormap is-record-valid? (gen-off-by1 record))))
