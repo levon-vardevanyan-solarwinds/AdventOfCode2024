@@ -32,7 +32,7 @@
           (list (cons (sub1 i) j) ; up
                 (cons (add1 i) j) ; down
                 (cons i (sub1 j)) ; left
-                (cons i (add1 j)) ; down
+                (cons i (add1 j)) ; right
                 )))
 
 (struct cell (pos from) #:transparent)
